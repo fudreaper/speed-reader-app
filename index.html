@@ -113,17 +113,6 @@
         <div id="controls-section">
             <textarea id="text-input" rows="5" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 mb-4 transition duration-150" placeholder="Paste the text you want to speed read here..."></textarea>
 
-            <!-- AD LOCATION 2: MID-APP (Contextual, between input and controls) -->
-            <div class="ad-container">
-                <p class="text-gray-500 text-xs font-semibold mb-1">ADVERTISEMENT</p>
-                <!-- REPLACE THIS BLOCK WITH YOUR ASYNCHRONOUS GOOGLE AD CODE -->
-                <div style="min-height: 250px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
-                    [MEDIUM RECTANGLE AD UNIT PLACEHOLDER - 300x250 or Responsive]
-                </div>
-                <!-- END AD BLOCK -->
-            </div>
-            <!-- END AD LOCATION 2 -->
-
             <!-- Status and WPM Display -->
             <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">
                 <span id="wpm-display" class="text-2xl font-semibold text-gray-700">WPM: <span id="current-wpm" class="text-emerald-600">300</span></span>
@@ -167,23 +156,23 @@
                 </button>
             </div>
             
+            <!-- AD LOCATION 2: MID-APP (Contextual, MOVED below Main Action Buttons) -->
+            <div class="ad-container">
+                <p class="text-gray-500 text-xs font-semibold mb-1">ADVERTISEMENT</p>
+                <!-- REPLACE THIS BLOCK WITH YOUR ASYNCHRONOUS GOOGLE AD CODE -->
+                <div style="min-height: 250px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+                    [MEDIUM RECTANGLE AD UNIT PLACEHOLDER - 300x250 or Responsive]
+                </div>
+                <!-- END AD BLOCK -->
+            </div>
+            <!-- END AD LOCATION 2 -->
+
             <!-- Message Box -->
             <div id="message-box" class="mt-6 p-3 text-center text-sm rounded-lg text-gray-800 hidden bg-yellow-100 border border-yellow-300"></div>
 
         </div>
     </div>
     
-    <!-- AD LOCATION 3: BELOW APP (Footer) -->
-    <div class="ad-container w-full max-w-4xl">
-        <p class="text-gray-500 text-xs font-semibold mb-1">ADVERTISEMENT</p>
-        <!-- REPLACE THIS BLOCK WITH YOUR ASYNCHRONOUS GOOGLE AD CODE -->
-        <div style="min-height: 90px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
-            [BOTTOM BANNER AD UNIT PLACEHOLDER - 728x90 or Responsive]
-        </div>
-        <!-- END AD BLOCK -->
-    </div>
-    <!-- END AD LOCATION 3 -->
-
     <script>
         // DOM Elements
         const textInput = document.getElementById('text-input');
