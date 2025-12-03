@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- START SEO OPTIMIZATIONS -->
+    <title>Free Online Speed Reader & Text-to-Speech (TTS) Tool | WPM Reader</title>
+    <meta name="description" content="Boost your reading speed instantly with our free online Speed Reader tool. Use the WPM reader to practice faster reading or enable TTS (Text-to-Speech) for hands-free listening and better focus.">
+    <meta name="keywords" content="speed reader, free speed reading app, online WPM reader, text to speech, TTS tool, RSVP reader, improve reading speed, read faster, reading comprehension tool, ai text, ai text to speech, AI reader">
+    <!-- END SEO OPTIMIZATIONS -->
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Montserrat Font for Header -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles for appearance */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        
+        /* Apply Montserrat to the main title */
+        .header-font {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.05em; /* A little extra spacing for boldness */
+            /* Custom gradient for the text */
+            background-image: linear-gradient(to right, #10b981, #34d399); /* Emerald to Light Emerald */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #10b981; /* Fallback color */
+        }
+
+        /* Custom track style for range slider */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #10b981; /* Emerald 500 */
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #10b981;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+        }
+        /* Keep the word display bold for readability */
+        #word-display {
+            font-weight: 700;
+        }
+
+        /* Ad unit styling for visibility */
+        .ad-container {
+            margin: 1.5rem auto; /* Vertical margin */
+            padding: 0.75rem;
+            background-color: #f8fafc; /* light gray/off-white background */
+            border: 1px solid #e2e8f0; /* light border */
+            border-radius: 0.5rem;
+            text-align: center;
+            max-width: 728px; /* Standard leaderboard max width */
+            overflow: hidden; /* Prevent ad overflow on small screens */
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen flex items-center justify-center">
+
+    <div class="w-full max-w-4xl bg-white rounded-xl shadow-2xl p-6 md:p-10">
+
+        <!-- Header -->
+        <h1 class="header-font text-5xl md:text-6xl font-extrabold mb-6 text-center text-shadow-lg">
+            Speed Reader
+        </h1>
+        
+        <p class="text-gray-500 mb-8 text-center">Paste your text below and set your desired reading speed.</p>
+        
+        <!-- AD LOCATION 1: TOP BANNER (High Visibility) -->
+        <div class="ad-container">
+            <p class="text-gray-500 text-xs font-semibold mb-1">ADVERTISEMENT</p>
+            <!-- REPLACE THIS BLOCK WITH YOUR ASYNCHRONOUS GOOGLE AD CODE -->
+            <div style="min-height: 90px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+                [TOP BANNER AD UNIT PLACEHOLDER - 728x90 or Responsive]
+            </div>
+            <!-- END AD BLOCK -->
+        </div>
+        <!-- END AD LOCATION 1 -->
+
+
+        <!-- Reading Display Area -->
+        <div class="border-4 border-emerald-500 bg-gray-900 text-white rounded-lg p-6 mb-8 h-32 flex items-center justify-center relative shadow-inner">
+            <!-- text-4xl md:text-5xl and text-white color are inherited here -->
+            <span id="word-display" class="text-4xl md:text-5xl tracking-wide select-none">
+                <!-- Set initial state text to gray -->
+                <span class="text-gray-400">Ready</span>
+            </span>
+            <!-- Loading Indicator (Hidden by default) -->
+            <div id="loading-indicator" class="hidden absolute inset-0 bg-gray-900 bg-opacity-90 flex items-center justify-center">
+                <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="text-lg text-emerald-400">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Text Input & Controls -->
+        <div id="controls-section">
+            <textarea id="text-input" rows="5" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 mb-4 transition duration-150" placeholder="Paste the text you want to speed read here..."></textarea>
+
+            <!-- AD LOCATION 2: MID-APP (Contextual, between input and controls) -->
+            <div class="ad-container">
+                <p class="text-gray-500 text-xs font-semibold mb-1">ADVERTISEMENT</p>
+                <!-- REPLACE THIS BLOCK WITH YOUR ASYNCHRONOUS GOOGLE AD CODE -->
+                <div style="min-height: 250px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+                    [MEDIUM RECTANGLE AD UNIT PLACEHOLDER - 300x250 or Responsive]
+                </div>
+                <!-- END AD BLOCK -->
+            </div>
+            <!-- END AD LOCATION 2 -->
+
+            <!-- Status and WPM Display -->
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 space-y-4 sm:space-y-0">
+                <span id="wpm-display" class="text-2xl font-semibold text-gray-700">WPM: <span id="current-wpm" class="text-emerald-600">300</span></span>
+                <span id="progress-display" class="text-lg font-medium text-gray-500">
+                    Word: <span id="current-word-index">0</span> / <span id="total-words">0</span>
+                </span>
+            </div>
+
+            <!-- Slider Control -->
+            <div class="mb-8">
+                <label for="wpm-slider" class="block text-sm font-medium text-gray-700 mb-2">Adjust Speed (300 WPM to 800 WPM)</label>
+                <input type="range" id="wpm-slider" min="300" max="800" value="300" step="100" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer transition duration-150">
+                <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>300</span>
+                    <span>400</span>
+                    <span>500</span>
+                    <span>600</span>
+                    <span>700</span>
+                    <span>800</span>
+                </div>
+            </div>
+
+            <!-- TTS Toggle (Standalone Feature) -->
+            <div class="mb-4">
+                <button id="tts-button" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-[1.01]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 3v14a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.507 8.017a1 1 0 00-.518.875 1.5 1.5 0 010 2.216 1 1 0 00.518.875 1 1 0 001.037-1.748 3.504 3.504 0 000-3.5 1 1 0 00-1.037-.018z" clip-rule="evenodd" />
+                    </svg>
+                    TTS OFF (Click to Enable)
+                </button>
+            </div>
+
+
+            <!-- Main Action Buttons -->
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <button id="start-button" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-[1.01]">
+                    Start Reading
+                </button>
+                <button id="stop-button" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-[1.01]" disabled>
+                    Stop Reading
+                </button>
+            </div>
+            
+            <!-- Message Box -->
+            <div id="message-box" class="mt-6 p-3 text-center text-sm rounded-lg text-gray-800 hidden bg-yellow-100 border border-yellow-300"></div>
+
+        </div>
+    </div>
+    
+    <!-- AD LOCATION 3: BELOW APP (Footer) -->
+    <div class="ad-container w-full max-w-4xl">
+        <p class="text-gray-500 text-xs font-semibold mb-1">ADVERTISEMENT</p>
+        <!-- REPLACE THIS BLOCK WITH YOUR ASYNCHRONOUS GOOGLE AD CODE -->
+        <div style="min-height: 90px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+            [BOTTOM BANNER AD UNIT PLACEHOLDER - 728x90 or Responsive]
+        </div>
+        <!-- END AD BLOCK -->
+    </div>
+    <!-- END AD LOCATION 3 -->
+
+    <script>
+        // DOM Elements
+        const textInput = document.getElementById('text-input');
+        const wordDisplay = document.getElementById('word-display');
+        const wpmSlider = document.getElementById('wpm-slider');
+        const currentWPM = document.getElementById('current-wpm');
+        const startButton = document.getElementById('start-button');
+        const stopButton = document.getElementById('stop-button');
+        const ttsButton = document.getElementById('tts-button');
+        const currentWordIndexSpan = document.getElementById('current-word-index');
+        const totalWordsSpan = document.getElementById('total-words');
+        const messageBox = document.getElementById('message-box');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        
+        // State Variables
+        let words = [];
+        let currentIndex = 0;
+        let readingInterval = null;
+        let isReading = false;
+        let currentSpeedWPM = 300; // Initial speed
+        let isTTSActive = false; // New state variable for Text-to-Speech
+
+        // --- TTS API Setup (NATIVE BROWSER API) ---
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.lang = 'en-US'; 
+        // Set fixed rate (1.0) for comfortable, natural reading.
+        utterance.rate = 1.0; 
+
+        // --- Utility Functions ---
+
+        /**
+         * Calculates the delay in milliseconds per word based on WPM.
+         * Delay = 60000 / WPM
+         * @param {number} wpm - Words Per Minute.
+         * @returns {number} Delay in milliseconds.
+         */
+        const calculateDelay = (wpm) => 60000 / wpm;
+
+        /**
+         * Displays a temporary message in the message box.
+         * @param {string} message - The message to display.
+         * @param {string} type - 'success', 'error', or 'warning' for styling.
+         */
+        const showMessage = (message, type = 'warning') => {
+            messageBox.textContent = message;
+            messageBox.className = 'mt-6 p-3 text-center text-sm rounded-lg border';
+            messageBox.classList.remove('hidden');
+
+            switch (type) {
+                case 'success':
+                    messageBox.classList.add('text-green-800', 'bg-green-100', 'border-green-300');
+                    break;
+                case 'error':
+                    messageBox.classList.add('text-red-800', 'bg-red-100', 'border-red-300');
+                    break;
+                default: // warning
+                    messageBox.classList.add('text-yellow-800', 'bg-yellow-100', 'border-yellow-300');
+                    break;
+            }
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageBox.classList.add('hidden');
+            }, 5000);
+        };
+
+        // --- Core Speed Reading Logic ---
+
+        /**
+         * Cleans and splits the input text into an array of words.
+         * @param {string} text - The raw input text.
+         * @returns {string[]} Array of words.
+         */
+        const parseText = (text) => {
+            const cleanedText = text
+                .replace(/[\n\r]/g, ' ') 
+                .replace(/([.?!,;:"()])/g, ' $1 ') 
+                .replace(/--/g, ' — ') 
+                .replace(/\s+/g, ' ') 
+                .trim();
+
+            return cleanedText.split(/\s+/).filter(word => word.length > 0);
+        };
+
+        /**
+         * Starts reading the entire input text aloud, independently of the word display timing.
+         */
+        const speakFullText = () => {
+            const rawText = textInput.value.trim();
+            if (!rawText) {
+                showMessage("Please enter some text before enabling Text-to-Speech.", 'warning');
+                isTTSActive = false; // Revert toggle state
+                updateTTSButtonAppearance();
+                return;
+            }
+
+            // Cancel any previous speech
+            if (synth.speaking) {
+                synth.cancel();
+            }
+
+            // Speak the entire text
+            utterance.text = rawText;
+            synth.speak(utterance);
+
+            // Update TTS state upon successful playback start
+            isTTSActive = true;
+            updateTTSButtonAppearance();
+
+             // Handle when speech finishes naturally
+            utterance.onend = () => {
+                isTTSActive = false;
+                updateTTSButtonAppearance();
+                showMessage("Text-to-Speech finished reading the text.", 'success');
+            };
+            
+            utterance.onerror = (event) => {
+                console.error('Speech synthesis error:', event);
+                isTTSActive = false;
+                updateTTSButtonAppearance();
+                showMessage("Text-to-Speech error: Could not read text.", 'error');
+            };
+        };
+
+        /**
+         * Updates the appearance of the TTS button based on the active state.
+         */
+        const updateTTSButtonAppearance = () => {
+            if (isTTSActive) {
+                ttsButton.textContent = 'TTS ON (Playing)';
+                ttsButton.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                ttsButton.classList.add('bg-green-600', 'hover:bg-green-700');
+                ttsButton.disabled = false;
+            } else {
+                ttsButton.textContent = 'TTS OFF (Click to Enable)';
+                ttsButton.classList.remove('bg-green-600', 'hover:bg-green-700');
+                ttsButton.classList.add('bg-blue-500', 'hover:bg-blue-600');
+                ttsButton.disabled = false;
+            }
+        };
+
+        /**
+         * Renders the current word without special highlighting.
+         * @param {string} word - The word to display.
+         */
+        const renderWord = (word) => {
+            if (!word) {
+                wordDisplay.innerHTML = '<span class="text-gray-400">---</span>';
+                return;
+            }
+            wordDisplay.textContent = word;
+        };
+
+        /**
+         * Advances the reading index and updates the display.
+         */
+        const nextWord = () => {
+            if (currentIndex < words.length) {
+                const word = words[currentIndex];
+                renderWord(word);
+                currentWordIndexSpan.textContent = currentIndex + 1;
+                // TTS call is completely decoupled
+
+                currentIndex++;
+            } else {
+                stopReading();
+                showMessage('Reading finished!', 'success');
+                wordDisplay.innerHTML = '<span class="text-gray-400">Finished!</span>';
+            }
+        };
+
+        /**
+         * Starts the speed reading interval.
+         */
+        const startReading = () => {
+            const rawText = textInput.value.trim();
+            if (!rawText) {
+                showMessage("Please enter some text to begin reading.", 'warning');
+                return;
+            }
+
+            if (!isReading) {
+                if (currentIndex === 0) {
+                    loadingIndicator.classList.remove('hidden');
+                    words = parseText(rawText);
+                    totalWordsSpan.textContent = words.length;
+                    currentIndex = 0; 
+                    loadingIndicator.classList.add('hidden');
+                } else if (currentIndex >= words.length) {
+                    currentIndex = 0;
+                }
+
+                if (words.length === 0) {
+                    showMessage("Could not find any words in the input text.", 'error');
+                    return;
+                }
+
+                isReading = true;
+                startButton.textContent = 'Pause Reading';
+                startButton.classList.remove('bg-emerald-600');
+                startButton.classList.add('bg-orange-500');
+                stopButton.disabled = false;
+                textInput.disabled = true; 
+                wpmSlider.disabled = false; 
+
+                const delay = calculateDelay(currentSpeedWPM);
+
+                readingInterval = setInterval(nextWord, delay);
+            } else {
+                // Pause functionality
+                clearInterval(readingInterval);
+                readingInterval = null;
+                isReading = false;
+                startButton.textContent = 'Resume Reading';
+                startButton.classList.remove('bg-orange-500');
+                startButton.classList.add('bg-emerald-600');
+                wordDisplay.innerHTML = '<span class="text-gray-400">Paused</span>';
+            }
+        };
+
+        /**
+         * Stops the speed reading and resets the state.
+         */
+        const stopReading = () => {
+            clearInterval(readingInterval);
+            readingInterval = null;
+            isReading = false;
+            currentIndex = 0;
+            startButton.textContent = 'Start Reading';
+            startButton.classList.remove('bg-orange-500');
+            startButton.classList.add('bg-emerald-600');
+            stopButton.disabled = true;
+            textInput.disabled = false;
+            wpmSlider.disabled = false;
+            currentWordIndexSpan.textContent = 0;
+            wordDisplay.innerHTML = '<span class="text-gray-400">Ready</span>';
+            
+            // Stop TTS (cancel playback)
+            if (synth.speaking) {
+                synth.cancel(); 
+                isTTSActive = false;
+                updateTTSButtonAppearance();
+            }
+        };
+
+        // --- Event Listeners ---
+
+        wpmSlider.addEventListener('input', (e) => {
+            const newWPM = parseInt(e.target.value, 10);
+            currentSpeedWPM = newWPM;
+            currentWPM.textContent = newWPM;
+
+            if (isReading) {
+                clearInterval(readingInterval);
+                const newDelay = calculateDelay(currentSpeedWPM);
+                readingInterval = setInterval(nextWord, newDelay);
+            }
+        });
+
+        startButton.addEventListener('click', startReading);
+        stopButton.addEventListener('click', stopReading);
+
+        // --- TTS Toggle Logic ---
+        ttsButton.addEventListener('click', () => {
+            // Check for browser support
+            if (!window.speechSynthesis) {
+                showMessage("Your browser does not support Text-to-Speech.", 'error');
+                return;
+            }
+
+            // Check if audio is currently playing
+            if (isTTSActive || synth.speaking) {
+                // If active or speaking, stop it
+                synth.cancel(); 
+                isTTSActive = false;
+                updateTTSButtonAppearance();
+                showMessage("Text-to-Speech has been stopped.", 'warning');
+            } else {
+                // If inactive, start it
+                speakFullText(); // Starts speaking the entire text
+                showMessage("Text-to-Speech initiated.", 'success');
+            }
+        });
+        // -----------------------------
+
+        // Update total words count on input change
+        textInput.addEventListener('input', () => {
+             const rawText = textInput.value.trim();
+             if (!isReading) {
+                const tempWords = parseText(rawText);
+                totalWordsSpan.textContent = tempWords.length;
+             }
+        });
+
+        // Initialize display and check for native TTS support
+        window.onload = () => {
+             if (!window.speechSynthesis) {
+                showMessage("Warning: Your browser does not support Text-to-Speech.", 'error');
+                ttsButton.disabled = true;
+                ttsButton.textContent = 'TTS Not Supported';
+                ttsButton.classList.remove('bg-blue-500');
+                ttsButton.classList.add('bg-gray-400');
+            }
+            updateTTSButtonAppearance();
+        };
+
+    </script>
+</body>
+</html>
